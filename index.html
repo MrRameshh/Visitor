@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Form</title>
+    <link rel="stylesheet" href="sam2.css">
+</head>
+<form method="GET" action="index1.php">
+    <h1>GEELON INDUSTRIES PRIVATE LIMITED</h1>
+        <h5>SURVEY NO 255/1/16, BEHIND IPCA LABORATORY, VILLAGE-ATHAL, DADRA AND NAGAR HAVELI & DAMAN & DIU-396230.</h5>
+        <h2>PURCHASE ORDER</h2><hr>
+    <textarea id="left1" cols="50" rows="8" name="psale" placeholder="Sale Person Details"></textarea>
+<div class="dname">
+    <select >
+        <option value="PURCHASE">PURCHASE</option>
+        <option value="SALE">SALE</option>
+    </select><br>
+      P.O. NO. :<input type="text" ><br><br>
+      P.O. DATE:<span id="current-date"></span>
+      <script>
+         const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+         document.getElementById('current-date').textContent = formattedDate;
+      </script>
+      <br>
+      Delivery Address :<br>
+      <textarea cols="25" rows="4" name="daddr">
+        SURVEY NO 255/1/16, BEHIND IPCA LABORATORY,
+        VILLAGE-ATHAL, DADRA AND NAGAR HAVELI &
+        DAMAN & DIU-396230.</textarea>
+</div>
+<div class="pname">
+        <button type="submit" >Submit</button>
+</div> 
+</form>
+</html>

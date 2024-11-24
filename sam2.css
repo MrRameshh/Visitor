@@ -1,0 +1,93 @@
+/* Basic Reset */ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: revert-layer;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Container for the Form */
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #2c3e50;
+}
+
+h5 {
+    text-align: center;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+h2 {
+    text-align: center;
+    font-size: 22px;
+    color: #34495e;
+    margin-top: 20px;
+}
+
+/* Form Group Styles */
+div {
+    margin-bottom: 20px;
+}
+
+/* Labels and Input Styles */
+input[type="text"], input[type="date"], textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="text"]:focus, input[type="date"]:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Button Styles */
+button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Section-specific styling */
+.dname {
+    margin-bottom: 20px;
+}
+
+.pname {
+    text-align: center;
+}

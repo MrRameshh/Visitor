@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Update Status</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="assing.html">Assing</a>
+        <a href="#" onclick="logout()">logout</a>
+
+    </nav>
+    <h2>Admin: Update Visitor Application Status</h2>
+    <form method="GET" action="admin_status.php">
+        <label for="username">Username:</label><br><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="status">New Status:</label><br>
+        <select id="status" name="status" required>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+        </select>
+        <button type="submit">Update Status</button>
+    </form>
+</body>
+</html>

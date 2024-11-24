@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Purchase</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Purchase Entry Form</h2>
+        <form id="purchaseForm" method="post" action="">
+            <div class="form-group">
+                <label for="poNumber">P.O. No.:</label>
+                <input type="text" id="poNumber" name="poNumber" value="PO-001" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="item">Item Name:</label>
+                <input type="text" id="item" name="item" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price per Unit:</label>
+                <input type="number" id="price" name="price" step="0.01" min="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="supplier">Supplier Name:</label>
+                <input type="text" id="supplier" name="supplier" required>
+            </div>
+
+            <button type="submit">Add Purchase</button>
+        </form>                         
+        <div class="purchase-summary" id="summarySection" style="display:none;">
+            <h3>Purchase Summary</h3>
+            <table id="purchaseSummaryTable">
+                <thead>
+                    <tr>
+                        <th>P.O. No.</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Price per Unit</th>
+                        <th>Total Price</th>
+                        <th>Supplier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated here -->
+                </tbody>
+            </table>
+            <button class="print-btn" onclick="printSummary()">Print Summary</button>
+        </div>
+    </div>
+
+    <script>
+
+        function printSummary() {
+        // Prepare data to be sent for insertion into the database
+        const rows = document.querySelectorAll("#purchaseSummaryTable tbody tr");
+        const purchaseData = [];
+        }
+        rows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            purchaseData.push({
+                po_number: cells[0].textContent,
+                item_name: cells[1].textContent,
+                quantity: cells[2].textContent,
+                price: cells[3].textContent,
+                total_price: cells[4].textContent,
+                supplier_name: cells[5].textContent
+            });
+        });
+
+        let poNumberCounter = 1; // Initialize counter for auto-incrementing P.O. No.
+        const purchaseForm = document.getElementById('purchaseForm');
+        const purchaseSummaryTable = document.getElementById('purchaseSummaryTable').getElementsByTagName('tbody')[0];
+        const summarySection = document.getElementById('summarySection');
+        
+        purchaseForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Increment P.O. No. and update the input value
+            const poNumber = `PO-${String(poNumberCounter).padStart(3, '0')}`;
+            poNumberCounter++; // Increment the counter for the next entry
+            
+            const item = document.getElementById('item').value;
+            const quantity = document.getElementById('quantity').value;
+            const price = document.getElementById('price').value;
+            const supplier = document.getElementById('supplier').value;
+            
+            const totalPrice = (quantity * price).toFixed(2);
+            
+            // Add a new row to the summary table
+            const newRow = purchaseSummaryTable.insertRow();
+            newRow.innerHTML = `
+                <td>${poNumber}</td>
+                <td>${item}</td>
+                <td>${quantity}</td>
+                <td>${price}</td>
+                <td>${totalPrice}</td>
+                <td>${supplier}</td>
+            `;
+            
+            // Show the summary section after the first entry
+            summarySection.style.display = 'block';
+            
+            // Clear the form after submitting
+            purchaseForm.reset();
+        });
+        
+        // Send data via AJAX to store in the database
+        fetch(index.php, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ purchases: purchaseData })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Purchase summary stored successfully.');
+            } else {
+                alert('Error storing purchase summary.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while storing the summary.');
+        });
+
+        // Open print window
+        const printWindow = window.open('', '', 'height=600,width=800');
+        printWindow.document.write('<html><head><title>Purchase Summary</title></head><body>');
+        printWindow.document.write('<h2>Purchase Summary</h2>');
+        printWindow.document.write(document.querySelector('.purchase-summary').innerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    </script>
+</body>
+</html>

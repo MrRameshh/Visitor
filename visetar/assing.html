@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - Assign Position</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="admin.html">Admin</a>
+        <a href="logout.html">Logout</a>
+    </nav>
+
+    <h2>Admin: Assign Position to User</h2>
+    <form method="get" action="assing.php">
+        <label for="username">Username:</label><br><br>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="position">Select Position:</label><br><br>
+        <select id="position" name="position" required>
+            <option value="admin">Admin</option>
+            <option value="manager">Manager</option>
+            <option value="user">User</option>
+            <option value="moderator">Moderator</option>
+            <option value="guest">Guest</option>
+        </select><br><br>
+
+        <button type="submit">Assign Position</button>
+    </form>
+</body>
+</html>
